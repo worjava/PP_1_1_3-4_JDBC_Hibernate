@@ -7,14 +7,14 @@ import java.sql.SQLException;
 public class Util {
 
 
-    private final String PASSWORD = "root";
-    private final String UserName = "root";
+    private static final String PASSWORD = "root";
+    private static final String UserName = "root";
 
-    private final String URL = "jdbc:mysql://localhost:3306/game";
+    private static final String URL = "jdbc:mysql://localhost:3306/game";
 
-    private final String DRIVER = "com.mysql.cj.jdbc.Driver"; //com.mysql.cj.jdbc.Driver;
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //com.mysql.cj.jdbc.Driver;
 
-    public  Connection getConnection() {
+    public static   Connection getConnection() {
         try {
             Class.forName(DRIVER);
             System.out.println("Connection OK");

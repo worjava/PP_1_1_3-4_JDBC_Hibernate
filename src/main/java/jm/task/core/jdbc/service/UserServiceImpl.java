@@ -5,12 +5,16 @@ import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jm.task.core.jdbc.util.Util.getConnection;
 
-public class UserServiceImpl extends Util implements UserService {
+
+public class UserServiceImpl  implements UserService {
 
     Connection connection = getConnection();
 
@@ -42,7 +46,9 @@ public class UserServiceImpl extends Util implements UserService {
 
         return userDaoJDBC.getAllUsers();
 
-    }
+        }
+
+
 
     public void cleanUsersTable() {
         UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();

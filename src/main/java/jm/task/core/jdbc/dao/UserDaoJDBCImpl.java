@@ -2,12 +2,19 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl extends Util implements UserDao {
+import static jm.task.core.jdbc.util.Util.getConnection;
+
+public class UserDaoJDBCImpl   implements UserDao  {
     public UserDaoJDBCImpl() {
 
     }
@@ -16,7 +23,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void createUsersTable() {
         String sql = """
-                CREATE TABLE users(id INT PRIMARY KEY  AUTO_INCREMENT,name TEXT, lastname TEXT,age INT)""";
+         CREATE TABLE users(id INT PRIMARY KEY  AUTO_INCREMENT,name TEXT, lastname TEXT,age INT)""";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -80,9 +87,9 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                                 
                 select *from users""";
 
-        try (Statement statement = connection.createStatement()) {
+        try (var statement = connection.createStatement()) {
 
-            try (ResultSet resultSet = statement.executeQuery(sql)) {
+            try (var resultSet = statement.executeQuery(sql)) {
                 while (resultSet.next()) {
                     User user = new User();
                     user.setId((long) resultSet.getInt("id"));
@@ -104,9 +111,9 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             return userList;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
+
         }
     }
-
     public void cleanUsersTable() {
         String sql = """
                 TRUNCATE TABLE users
