@@ -22,9 +22,9 @@ public class User {
     public String toString() {
         return "User{" +
                "id=" + id +
-               ", Имя '" + name + '\'' +
-               ", Достижение '" + lastName + '\'' +
-               ", возвраст создания " + age +
+               ", name='" + name + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", age=" + age +
                '}';
     }
 

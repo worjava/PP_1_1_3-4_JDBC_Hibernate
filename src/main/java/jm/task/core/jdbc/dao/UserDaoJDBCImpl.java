@@ -9,6 +9,7 @@ import java.sql.Statement;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,12 @@ public class UserDaoJDBCImpl   implements UserDao  {
 
     }
 
-    Connection connection = getConnection();
+
 
     public void createUsersTable() {
         String sql = """
          CREATE TABLE users(id INT PRIMARY KEY  AUTO_INCREMENT,name TEXT, lastname TEXT,age INT)""";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Exception в методе createUsersTable " + e);
@@ -35,7 +36,7 @@ public class UserDaoJDBCImpl   implements UserDao  {
     public void dropUsersTable() {
         String sql = """
                 DROP TABLE IF EXISTS users """;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement("DROP TABLE IF EXISTS users ")) {
             try {
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
@@ -70,7 +71,7 @@ public class UserDaoJDBCImpl   implements UserDao  {
     public void removeUserById(long id) {
         String sql = """
                 DELETE FROM users WHERE id  =?      """;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -83,42 +84,32 @@ public class UserDaoJDBCImpl   implements UserDao  {
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
 
-        String sql = """
-                                
-                select *from users""";
 
-        try (var statement = connection.createStatement()) {
 
-            try (var resultSet = statement.executeQuery(sql)) {
-                while (resultSet.next()) {
-                    User user = new User();
-                    user.setId((long) resultSet.getInt("id"));
-                    user.setName(resultSet.getString("name"));
-                    user.setLastName(resultSet.getString("lastName"));
-                    user.setAge((byte) resultSet.getInt("age"));
-                    userList.add(user);
-                }
+          try (var resultSet = getConnection().createStatement().executeQuery("SELECT *FROM users")){
 
-//                    int id = Integer.parseInt(resultset.getObject(1).toString());
-//                    String name = resultset.getObject(2).toString();
-//                    String lastname = resultset.getObject(3).toString();
-//                    int age = Integer.parseInt(resultset.getObject(4).toString());
-//                    User user = new User((long) id,name,lastname, (byte) age);
-//                    userList.add(user);
+            while (resultSet.next()) {
+                User user = new User();
+                user.setId((long) resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setAge((byte) resultSet.getInt("age"));
+                userList.add(user);
             }
+            userList.forEach(System.out::println);
 
-
-            return userList;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
 
         }
+        return userList;
     }
-    public void cleanUsersTable() {
+
+        public void cleanUsersTable() {
         String sql = """
                 TRUNCATE TABLE users
                 """;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = getConnection().prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("SQL Exception в методе cleanUsersTable " + e);

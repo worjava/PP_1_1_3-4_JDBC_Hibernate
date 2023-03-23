@@ -11,24 +11,24 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args)  {
-        Util util = new Util();
-        util.getConnection();
+    public static void main(String[] args) {
+
+
         UserDao userDao = new UserDaoJDBCImpl();
 
 
-             userDao.createUsersTable();
 
         userDao.saveUser("Менделев", "Таблица", (byte) 35);
         userDao.saveUser("Билл Гейтс", "основатель Microsoft", (byte) 20);
         userDao.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
         userDao.saveUser("Стив Джобс", "основатель Apple", (byte) 21);
 
-        userDao.removeUserById(1);
+      userDao.removeUserById(1);
 
-        userDao.cleanUsersTable();
 
-        userDao.dropUsersTable();
+
+
+
 
     }
 

@@ -15,43 +15,41 @@ import static jm.task.core.jdbc.util.Util.getConnection;
 
 
 public class UserServiceImpl  implements UserService {
+ private   UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
 
-    Connection connection = getConnection();
 
     public void createUsersTable() {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+
         userDaoJDBC.createUsersTable();
     }
 
     public void dropUsersTable() {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+
         userDaoJDBC.dropUsersTable();
     }
 
 
     public void saveUser(String name, String lastName, byte age) {
 
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+
         userDaoJDBC.saveUser(name, lastName, age);
     }
 
     public void removeUserById(long id) {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+
         userDaoJDBC.removeUserById(id);
 
     }
 
-    public List<User> getAllUsers() {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+    public List<User> getAllUsers()  {
+
 
         return userDaoJDBC.getAllUsers();
 
-        }
 
+}
+        public void cleanUsersTable() {
 
-
-    public void cleanUsersTable() {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
         userDaoJDBC.cleanUsersTable();
 
     }
