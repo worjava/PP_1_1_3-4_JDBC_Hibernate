@@ -16,7 +16,7 @@ import static jm.task.core.jdbc.util.Util.getConnection;
 
 
 public class UserServiceImpl  implements UserDao {
- private   UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+ private  UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
 
 
     public void createUsersTable() {
