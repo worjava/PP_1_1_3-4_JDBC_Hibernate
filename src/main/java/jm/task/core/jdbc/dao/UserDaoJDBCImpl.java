@@ -5,7 +5,7 @@ import jm.task.core.jdbc.util.Util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 
 
@@ -23,7 +23,7 @@ private Connection connection = Util.getConnection();
 
     public void createUsersTable() {
         String sql = """
-         CREATE TABLE users(id INT PRIMARY KEY  AUTO_INCREMENT,name TEXT, lastname TEXT,age INT)""";
+         CREATE TABLE IF NOT exists users (id INT PRIMARY KEY  AUTO_INCREMENT ,name TEXT, lastname TEXT,age INT)""";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ private Connection connection = Util.getConnection();
 
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()   {
         List<User> userList = new ArrayList<>();
 
 

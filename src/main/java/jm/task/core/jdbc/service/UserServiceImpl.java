@@ -15,8 +15,8 @@ import java.util.List;
 import static jm.task.core.jdbc.util.Util.getConnection;
 
 
-public class UserServiceImpl  implements UserDao {
- private  UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+public class UserServiceImpl  implements UserService {
+ private  UserDao userDaoJDBC = new UserDaoJDBCImpl();
 
 
     public void createUsersTable() {

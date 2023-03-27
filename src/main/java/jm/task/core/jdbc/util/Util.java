@@ -15,18 +15,25 @@ public class Util {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //com.mysql.cj.jdbc.Driver;
 
     public static   Connection getConnection() {
+
         try {
             Class.forName(DRIVER);
-
-            return  DriverManager.getConnection(URL, UserName, PASSWORD);
-
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Error connecting to database", e);
+        } catch (ClassNotFoundException e) {
+           e.printStackTrace();
         }
+
+        try {
+            return     DriverManager.getConnection(URL, UserName, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
     }
 
 
-}
+
 
 
 
