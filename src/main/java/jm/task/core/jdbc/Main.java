@@ -17,15 +17,14 @@ public class Main {
         UserService userService = new UserServiceImpl();
 
 ////
-////        userService.createUsersTable();
+    userService.createUsersTable();
 //
 ////        userService.saveUser("Менделев", "Таблица", (byte) 35);
 ////        userService.saveUser("Билл Гейтс", "основатель Microsoft", (byte) 20);
 ////        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
 ////        userService.saveUser("Стив Джобс", "основатель Apple", (byte) 21);
 
-
-
+        userService.getAllUsers();
 
 
     }
