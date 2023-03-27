@@ -14,16 +14,17 @@ public class Main {
     public static void main(String[] args) {
 
 
-        UserDao userDao = new UserDaoJDBCImpl();
+     UserServiceImpl userService = new UserServiceImpl();
 
 
 
-        userDao.saveUser("Менделев", "Таблица", (byte) 35);
-        userDao.saveUser("Билл Гейтс", "основатель Microsoft", (byte) 20);
-        userDao.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
-        userDao.saveUser("Стив Джобс", "основатель Apple", (byte) 21);
+        userService.saveUser("Менделев", "Таблица", (byte) 35);
+        userService.saveUser("Билл Гейтс", "основатель Microsoft", (byte) 20);
+        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+        userService.saveUser("Стив Джобс", "основатель Apple", (byte) 21);
 
-      userDao.removeUserById(1);
+      userService.removeUserById(1);
+        System.out.println( userService.getAllUsers());
 
 
 
