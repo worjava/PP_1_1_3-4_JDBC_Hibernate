@@ -2,8 +2,8 @@ package jm.task.core.jdbc.model;
 
 import javax.persistence.*;
 import java.util.Objects;
-
-@Table
+@Entity
+@Table(name = "Users")
 public class User {
     @Override
     public boolean equals(Object o) {
