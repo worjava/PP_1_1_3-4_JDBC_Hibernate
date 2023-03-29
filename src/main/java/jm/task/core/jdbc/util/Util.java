@@ -38,10 +38,16 @@ public class Util {
     }
 
 
-    public static  SessionFactory getSession() {
+    public static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().addAnnotatedClass(User.class);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
 
+        configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/game");
+        configuration.setProperty("hibernate.connection.username", "root");
+        configuration.setProperty("hibernate.connection.password", "root");
+        configuration.setProperty("hibernate.current_session_context_class", "thread");
+
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
 
         return sessionFactory;
     }

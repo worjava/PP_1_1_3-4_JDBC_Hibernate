@@ -14,20 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+public class UserDaoJDBCImpl implements UserDao {
 
-public class UserDaoJDBCImpl   implements UserDao  {
+    public UserDaoJDBCImpl() {
+    }
 
-   public UserDaoJDBCImpl() {}
-
-private Connection connection = Util.getConnection();
+    private Connection connection = Util.getConnection();
 
     public void createUsersTable() {
         String sql = """
-         CREATE TABLE IF NOT exists users (id INT PRIMARY KEY  AUTO_INCREMENT ,name TEXT, lastname TEXT,age INT)""";
+                CREATE TABLE IF NOT exists users (id INT PRIMARY KEY  AUTO_INCREMENT ,name TEXT, lastname TEXT,age INT)""";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
@@ -36,26 +36,26 @@ private Connection connection = Util.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement("DROP TABLE IF EXISTS users ")) {
 
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+    }
 
 
     public void saveUser(String name, String lastName, byte age) {
 
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)")) {
+                "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)")) {
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
 
             preparedStatement.executeUpdate();
-            System.out.println("User с именем- " + name + " добавлен в базу данных");
+
             preparedStatement.close();
 
         } catch (SQLException e) {
@@ -77,12 +77,11 @@ private Connection connection = Util.getConnection();
 
     }
 
-    public List<User> getAllUsers()   {
+    public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
 
 
-
-          try (var resultSet = connection.createStatement().executeQuery("SELECT *FROM users")){
+        try (var resultSet = connection.createStatement().executeQuery("SELECT *FROM users")) {
 
             while (resultSet.next()) {
                 User user = new User();
@@ -101,7 +100,7 @@ private Connection connection = Util.getConnection();
         return userList;
     }
 
-        public void cleanUsersTable() {
+    public void cleanUsersTable() {
         String sql = """
                 TRUNCATE TABLE users
                 """;
