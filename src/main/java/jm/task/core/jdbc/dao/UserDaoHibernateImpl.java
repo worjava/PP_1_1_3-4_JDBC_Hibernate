@@ -50,7 +50,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void saveUser(String name, String lastName, byte age) {
         SessionFactory sessionFactory = getSession();
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (sessionFactory) {
+            Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             User user = new User(name, lastName, age);
@@ -63,7 +64,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         SessionFactory sessionFactory = getSession();
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (sessionFactory) {
+            Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             User user = session.get(User.class, id);
@@ -80,7 +82,8 @@ public class UserDaoHibernateImpl implements UserDao {
 
         List<User> userList;
         SessionFactory sessionFactory = getSession();
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (sessionFactory) {
+            Session session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             userList = session.createQuery("FROM User ", User.class).list();
