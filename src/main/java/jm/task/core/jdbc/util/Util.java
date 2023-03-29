@@ -38,12 +38,12 @@ public class Util {
     }
 
 
-    public static  Session getSession() {
+    public static  SessionFactory getSession() {
         Configuration configuration = new Configuration().addAnnotatedClass(User.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
 
-        return session;
+
+        return sessionFactory;
     }
 }
 

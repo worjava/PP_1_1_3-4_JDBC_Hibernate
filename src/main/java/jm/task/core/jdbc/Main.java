@@ -17,15 +17,21 @@ public class Main {
     public static void main(String[] args) {
 
 
-        UserDaoHibernateImpl userDaoHibernate = new UserDaoHibernateImpl();
-        userDaoHibernate.createUsersTable();
-        userDaoHibernate.dropUsersTable();//
-        userDaoHibernate.createUsersTable();
-        userDaoHibernate.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
-        userDaoHibernate.removeUserById(1);
-        userDaoHibernate.getAllUsers();
-        userDaoHibernate.cleanUsersTable();
-        userDaoHibernate.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+    UserService userService = new UserServiceImpl();
+//
+//      userService.createUsersTable();
+////        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+userService.createUsersTable();
+        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+        userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
+
+        userService.removeUserById(1);
+//
+//
+       userService.getAllUsers();
+      userService.cleanUsersTable();
+    userService.saveUser("Михаил Калашников", "оруженый конструктор", (byte) 27);
 
 
 //userService.saveUser("Менделев", "Таблица", (byte) 35);

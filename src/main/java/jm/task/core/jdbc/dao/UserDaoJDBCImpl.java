@@ -33,8 +33,7 @@ private Connection connection = Util.getConnection();
     }
 
     public void dropUsersTable() {
-        String sql = """
-                DROP TABLE IF EXISTS users """;
+
         try (PreparedStatement preparedStatement = connection.prepareStatement("DROP TABLE IF EXISTS users ")) {
 
                 preparedStatement.executeUpdate();
